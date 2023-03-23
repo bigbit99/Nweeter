@@ -13,7 +13,6 @@ import {
   faCheckSquare,
   faX,
 } from '@fortawesome/free-solid-svg-icons';
-import MiniLogo from 'components/MiniLogo';
 
 library.add(faCheckSquare, faCoffee, faX);
 

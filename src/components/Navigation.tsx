@@ -40,14 +40,14 @@ const List = styled.li<{ match: any }>`
   margin-bottom: 10px;
   cursor: pointer;
   a {
-    color: #fff;
+    color: #111;
     text-decoration: none;
     @media only screen and (max-width: 1220px) {
       display: none;
     }
   }
   div {
-    color: #fff;
+    color: #111;
   }
   &:hover {
     background-color: rgba(0, 0, 0, 0.2);
@@ -57,7 +57,6 @@ const List = styled.li<{ match: any }>`
 export default function Navigation({ userObj }: IUserObjProps) {
   const homeMatch = useMatch(HOME_URL);
   const profileMatch = useMatch(PROFILE_URL);
-  const todoMatch = useMatch(TODOS_URL);
   const navigate = useNavigate();
   const userName = userObj.displayName ? userObj.displayName : GUEST_NAME;
   const onURLClick = (URL: string) => {

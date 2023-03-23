@@ -8,6 +8,7 @@ import MessageForm from './components/MessageForm';
 import Message from './components/Message';
 import { Helmet } from 'react-helmet';
 import Navigation from 'components/Navigation';
+import TopBar from 'components/TopBar';
 
 const Container = styled.div`
   width: 100%;
@@ -17,24 +18,21 @@ const Container = styled.div`
   padding: 40px;
   box-sizing: border-box;
 `;
-const ContainerBack = styled.div`
+const ContainerBox = styled.div`
   width: 100%;
   height: 100%;
   background-color: #fff;
-  overflow: scroll;
+  overflow: hidden;
   border: 1px solid #111;
   border-radius: 10px;
   box-shadow: 7px 7px #111;
+  position: relative;
 `;
 
-const TopBar = styled.div`
+const ScrollWrap = styled.div`
   width: 100%;
-  height: 35px;
-  background-color: #a5a2f9;
-  border-bottom: 1px solid #111;
-  position: fixed;
-  z-index: 1000;
-  overflow: hidden;
+  height: 100%;
+  overflow: scroll;
 `;
 
 const ContentWrap = styled.div`
@@ -74,29 +72,31 @@ export default function Home({ userObj }: IUserObjProps) {
 
   return (
     <Container>
-      <ContainerBack>
+      <ContainerBox>
         <TopBar></TopBar>
-        <ContentWrap>
-          <Navigation userObj={userObj} />
-          <MessageForm userObj={userObj} />
-          <MessageWrapper>
-            {messageList.map((item: IMessageListProps) => (
-              <Message
-                editOnly={editOnly}
-                setEditOnly={setEditOnly}
-                key={item.id}
-                id={item.id}
-                userId={item.userId}
-                userImage={item.userImage}
-                text={item.text}
-                photoURL={item.photoURL}
-                createdAt={item.createdAt}
-                isOwner={userObj.uid === item.creatorId}
-              />
-            ))}
-          </MessageWrapper>
-        </ContentWrap>
-      </ContainerBack>
+        <ScrollWrap>
+          <ContentWrap>
+            <Navigation userObj={userObj} />
+            <MessageForm userObj={userObj} />
+            <MessageWrapper>
+              {messageList.map((item: IMessageListProps) => (
+                <Message
+                  editOnly={editOnly}
+                  setEditOnly={setEditOnly}
+                  key={item.id}
+                  id={item.id}
+                  userId={item.userId}
+                  userImage={item.userImage}
+                  text={item.text}
+                  photoURL={item.photoURL}
+                  createdAt={item.createdAt}
+                  isOwner={userObj.uid === item.creatorId}
+                />
+              ))}
+            </MessageWrapper>
+          </ContentWrap>
+        </ScrollWrap>
+      </ContainerBox>
     </Container>
   );
 }
