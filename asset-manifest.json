@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/bigbit99/Nweeter.git/static/js/main.a48a53dc.js",
-    "index.html": "/bigbit99/Nweeter.git/index.html",
-    "main.a48a53dc.js.map": "/bigbit99/Nweeter.git/static/js/main.a48a53dc.js.map"
+    "main.js": "/bigbit99/Nweeter/static/js/main.915ad3ba.js",
+    "index.html": "/bigbit99/Nweeter/index.html",
+    "main.915ad3ba.js.map": "/bigbit99/Nweeter/static/js/main.915ad3ba.js.map"
   },
   "entrypoints": [
-    "static/js/main.a48a53dc.js"
+    "static/js/main.915ad3ba.js"
   ]
 }
