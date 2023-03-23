@@ -6,6 +6,7 @@ import { IMessageListProps } from 'utils/interface';
 import { deleteObject, ref } from 'firebase/storage';
 import { MESSAGES } from 'constants/constant';
 import { dateFormater, onEnterPress } from 'utils/utilFn';
+import TopBar from 'components/TopBar';
 
 const Container = styled.div`
   position: relative;
@@ -33,17 +34,51 @@ const MessageText = styled.span`
   white-space: pre-wrap;
 `;
 
-const ButtonWrapper = styled.div``;
+const ButtonWrapper = styled.div`
+  position: relative;
+  > svg {
+    cursor: pointer;
+  }
+`;
+const ButtonBox = styled.div`
+  position: absolute;
+  width: 200px;
+  height: 80px;
+  right: 0;
+  top: 20px;
+  border: 1px solid #111;
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 3px 3px #111;
+  > div:nth-child(1) {
+    width: 100%;
+    height: 20px;
+    background-color: #74e7ca;
+    border-bottom: 1px solid #111;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+`;
+
+const ButtonArea = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 15px;
+`;
 
 const Button = styled.button`
   width: 60px;
   height: 30px;
   font-size: 1.2em;
-  border-radius: 15px;
-  border: ${({ theme }) => theme.baseBorderStyle};
+  border-radius: 8px;
+  border: 1px solid #111;
   cursor: pointer;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #111;
+    color: #fff;
   }
 `;
 
@@ -55,27 +90,36 @@ const DeleteButton = styled(Button)`
 const EditForm = styled.form`
   position: absolute;
   z-index: 444;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 600px;
-  height: 100%;
-  max-height: 200px;
-  left: 0;
+  justify-content: space-between; */
+  width: 464px;
+  border-radius: 10px;
   right: 0;
+  top: 20px;
   margin: 0 auto;
-  border: ${({ theme }) => theme.baseBorderStyle};
+  border: 1px solid #111;
   background-color: white;
-  padding: 17px;
-  opacity: 1;
+  > div:nth-child(1) {
+    width: 100%;
+    padding: 17px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+`;
+
+const EditInfo = styled.p`
+  font-size: 1.6em;
+  font-weight: bold;
+  margin-right: 10px;
 `;
 
 const EditInput = styled.textarea`
-  max-width: 65%;
-  width: 65%;
+  width: 100%;
   height: 100%;
   resize: none;
   max-height: 200px;
+  margin-top: 10px;
   font-size: 1.6em;
   &::placeholder {
     font-size: 2em;
@@ -99,26 +143,29 @@ const EditInput = styled.textarea`
 `;
 
 const EditSubmit = styled.input<{ isLength: boolean }>`
-  width: 60px;
-  height: 25px;
+  width: 100px;
+  height: 30px;
   font-size: 1.2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  margin-left: auto;
+  margin-top: 10px;
   color: white;
   font-weight: bold;
-  border: none;
-  margin-left: 10px;
-  border-radius: 17.5px;
+  border: 1px solid #111;
+
+  border-radius: 15px;
   cursor: ${({ isLength }) => (isLength ? 'pointer' : 'click')};
   background-color: ${({ theme, isLength }) =>
     isLength ? theme.mainBlueColor : theme.mainWhiteBlueColor};
 `;
 
+const EditClose = styled.button``;
+
 const Image = styled.img`
   width: 500px;
   height: 100%;
   border-radius: 20px;
+  border: 1px solid #111;
 `;
 
 const MessageWrapper = styled.div`
@@ -131,6 +178,7 @@ const UserImage = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 25px;
+  border: 1px solid #111;
 `;
 
 const UserWrapper = styled.div`
@@ -148,12 +196,6 @@ const CreateDate = styled.span`
   margin-left: 10px;
 `;
 
-const EditInfo = styled.span`
-  font-size: 1.6em;
-  font-weight: bold;
-  margin-right: 10px;
-`;
-
 export default function Message({
   id,
   text,
@@ -165,6 +207,7 @@ export default function Message({
   editOnly,
   setEditOnly,
 }: IMessageListProps) {
+  const [showButtonToggle, setShowButtonToggle] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editMessage, setEditMessage] = useState(text);
   const messageRef = doc(dbService, MESSAGES, `${id}`);
@@ -178,8 +221,12 @@ export default function Message({
       }
     }
   };
+
   const editRef = useRef<HTMLTextAreaElement>(null);
 
+  const onToggleButton = () => {
+    setShowButtonToggle((prev) => !prev);
+  };
   const onToggleEdit = () => {
     setIsEdit((prev) => !prev);
     setTimeout(() => {
@@ -195,11 +242,13 @@ export default function Message({
       text: editMessage,
     });
     setIsEdit(false);
+    setShowButtonToggle(false);
   };
 
   const onEditChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setEditMessage(e.target.value);
   };
+
   return (
     <Container key={id}>
       <UserImage src={userImage} />
@@ -211,31 +260,69 @@ export default function Message({
           </UserInfoWrapper>
           {isOwner && (
             <ButtonWrapper>
-              <DeleteButton onClick={onDeleteClick} value="Delete">
-                Delete
-              </DeleteButton>
-              <Button onClick={onToggleEdit} value="Edit">
-                Edit
-              </Button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                onClick={onToggleButton}
+              >
+                <path d="M20 14a2 2 0 1 1-.001-3.999A2 2 0 0 1 20 14ZM6 12a2 2 0 1 1-3.999.001A2 2 0 0 1 6 12Zm8 0a2 2 0 1 1-3.999.001A2 2 0 0 1 14 12Z"></path>
+              </svg>
+              {showButtonToggle && (
+                <ButtonBox>
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      width="16"
+                      height="16"
+                    >
+                      <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+                    </svg>
+                  </div>
+                  <ButtonArea>
+                    <DeleteButton onClick={onDeleteClick} value="Delete">
+                      Delete
+                    </DeleteButton>
+                    <Button onClick={onToggleEdit} value="Edit">
+                      Edit
+                    </Button>
+                  </ButtonArea>
+                </ButtonBox>
+              )}
               {isEdit && (
                 <EditForm
-                  onMouseLeave={onToggleEdit}
                   onSubmit={onEditSubmit}
                   onKeyPress={(e) => onEnterPress(e, onEditSubmit)}
                 >
-                  <EditInfo>수정 메세지 : </EditInfo>
-                  <EditInput
-                    ref={editRef}
-                    onChange={onEditChange}
-                    required
-                    placeholder="수정할 텍스트를 입력해주세요"
-                    value={editMessage}
-                  />
-                  <EditSubmit
-                    isLength={editMessage.length > 0}
-                    type="submit"
-                    value="수정하기"
-                  />
+                  <div>
+                    <div>
+                      <EditClose onClick={onToggleEdit} type="button">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 16 16"
+                          width="16"
+                          height="16"
+                        >
+                          <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+                        </svg>
+                      </EditClose>
+                    </div>
+                    <EditInfo>수정 메세지</EditInfo>
+                    <EditInput
+                      ref={editRef}
+                      onChange={onEditChange}
+                      required
+                      placeholder="수정할 내용을 입력해주세요"
+                      value={editMessage}
+                    />
+                    <EditSubmit
+                      isLength={editMessage.length > 0}
+                      type="submit"
+                      value="Complete"
+                    />
+                  </div>
                 </EditForm>
               )}
             </ButtonWrapper>

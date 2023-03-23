@@ -43,7 +43,7 @@ const SubmitInput = styled.input<{ isMessage: boolean }>`
   font-weight: 600;
   font-size: 1.2em;
   background-color: #9897ea;
-  border: 1px solid #fff;
+  border: 1px solid #111;
 `;
 
 const PhotoInput = styled.input`
@@ -66,6 +66,7 @@ const TextArea = styled.textarea`
   border-radius: 35px;
   padding: 15px;
   box-sizing: border-box;
+  border: 1px solid #111;
   &::placeholder {
     font-size: 1.5em;
     border: none;
@@ -123,7 +124,7 @@ const Label = styled.label`
   width: 40px;
   height: 40px;
   cursor: pointer;
-  color: ${({ theme }) => theme.mainBlueColor};
+  color: #111;
   box-sizing: border-box;
   &:hover {
     border-radius: 50%;
@@ -136,6 +137,7 @@ const TextWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   height: 50px;
+  margin-top: 60px;
   margin-bottom: 20px;
 `;
 
@@ -158,6 +160,7 @@ const ProfileImg = styled.img`
   height: 50px;
   border-radius: 25px;
   margin-right: 10px;
+  border: 1px solid #111;
 `;
 
 const Button = styled.button`
@@ -253,7 +256,6 @@ export default function MessageForm({ userObj }: IUserObjProps) {
 
   return (
     <Form onSubmit={onSubmit} onKeyPress={(e) => onEnterPress(e, onSubmit)}>
-      <Home>Home</Home>
       <TextWrapper>
         <ProfileImg
           src={userObj.photoURL !== null ? userObj.photoURL : GUEST_ICON}

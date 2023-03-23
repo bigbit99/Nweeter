@@ -15,6 +15,7 @@ const Bar = styled.div`
     display: block;
     border: 1px solid #111;
     background-color: #fff;
+    border-radius: 2px;
   }
   > span:last-child {
     margin-right: 10px;
