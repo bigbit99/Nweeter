@@ -186,7 +186,7 @@ const BaseButton = styled.div`
 
 const CreateId = styled(BaseButton)`
   background-color: #9897ea;
-  border: 1px solid #fff;
+  border: 1px solid #111;
   color: white;
   margin-bottom: 60px;
   &:hover {
@@ -197,7 +197,7 @@ const CreateId = styled(BaseButton)`
 const LoginId = styled(BaseButton)`
   background-color: white;
   color: #9897ea;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid #111;
   margin-bottom: 45px;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);

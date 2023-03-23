@@ -12,9 +12,8 @@ const Container = styled.div`
   position: relative;
   display: flex;
   width: 600px;
-
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
+  border-left: 1px solid #111;
+  border-right: 1px solid #111;
   border-top: none;
   padding: 17px;
 `;
@@ -53,12 +52,20 @@ const ButtonBox = styled.div`
   box-shadow: 3px 3px #111;
   > div:nth-child(1) {
     width: 100%;
-    height: 20px;
+    height: 25px;
     background-color: #74e7ca;
     border-bottom: 1px solid #111;
     display: flex;
     align-items: center;
     justify-content: end;
+
+    > div:nth-child(1) {
+      width: 15px;
+      height: 15px;
+      border: 1px solid #111;
+      background-color: #fff;
+      margin-right: 6px;
+    }
   }
 `;
 
@@ -90,9 +97,6 @@ const DeleteButton = styled(Button)`
 const EditForm = styled.form`
   position: absolute;
   z-index: 444;
-  /* display: flex;
-  align-items: center;
-  justify-content: space-between; */
   width: 464px;
   border-radius: 10px;
   right: 0;
@@ -100,9 +104,21 @@ const EditForm = styled.form`
   margin: 0 auto;
   border: 1px solid #111;
   background-color: white;
+  box-shadow: 3px 3px #111;
+  overflow: hidden;
   > div:nth-child(1) {
+    position: absolute;
     width: 100%;
-    padding: 17px;
+    height: 25px;
+    border-bottom: 1px solid #111;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    background-color: #74e7ca;
+  }
+  > div:nth-child(2) {
+    width: 100%;
+    padding: 40px 15px 15px 15px;
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -121,6 +137,7 @@ const EditInput = styled.textarea`
   max-height: 200px;
   margin-top: 10px;
   font-size: 1.6em;
+  box-sizing: border-box;
   &::placeholder {
     font-size: 2em;
     width: 100%;
@@ -159,7 +176,19 @@ const EditSubmit = styled.input<{ isLength: boolean }>`
     isLength ? theme.mainBlueColor : theme.mainWhiteBlueColor};
 `;
 
-const EditClose = styled.button``;
+const EditClose = styled.div`
+  cursor: pointer;
+  border: 1px solid #111;
+  background-color: #fff;
+  margin-right: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 17px;
+  height: 17px;
+  > svg {
+    margin-right: 10px;
+  }
+`;
 
 const Image = styled.img`
   width: 500px;
@@ -272,14 +301,16 @@ export default function Message({
               {showButtonToggle && (
                 <ButtonBox>
                   <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 16 16"
-                      width="16"
-                      height="16"
-                    >
-                      <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
-                    </svg>
+                    <div onClick={onToggleButton}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        width="16"
+                        height="16"
+                      >
+                        <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+                      </svg>
+                    </div>
                   </div>
                   <ButtonArea>
                     <DeleteButton onClick={onDeleteClick} value="Delete">
@@ -297,18 +328,18 @@ export default function Message({
                   onKeyPress={(e) => onEnterPress(e, onEditSubmit)}
                 >
                   <div>
-                    <div>
-                      <EditClose onClick={onToggleEdit} type="button">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 16 16"
-                          width="16"
-                          height="16"
-                        >
-                          <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
-                        </svg>
-                      </EditClose>
-                    </div>
+                    <EditClose onClick={onToggleEdit}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="16"
+                        width="16"
+                        height="16"
+                      >
+                        <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+                      </svg>
+                    </EditClose>
+                  </div>
+                  <div>
                     <EditInfo>수정 메세지</EditInfo>
                     <EditInput
                       ref={editRef}

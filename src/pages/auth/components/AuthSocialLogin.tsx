@@ -9,7 +9,7 @@ const LoginSelect = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 1.6em;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid #111;
   margin-bottom: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;

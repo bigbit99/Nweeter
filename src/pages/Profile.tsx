@@ -16,13 +16,26 @@ import { faImage, faX } from '@fortawesome/free-solid-svg-icons';
 import { Helmet } from 'react-helmet';
 import { onEnterPress } from 'utils/utilFn';
 import Navigation from 'components/Navigation';
+import TopBar from 'components/TopBar';
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
+  width: 100%;
   height: 100vh;
+  padding: 40px;
+  box-sizing: border-box;
   overflow: hidden;
   background-image: linear-gradient(to top, #fbc7d4, #c59de6, #9897f0);
+`;
+
+const ContainerBox = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid #111;
+  border-radius: 10px;
+  box-shadow: 7px 7px #111;
+  position: relative;
 `;
 
 const Logout = styled.button`
@@ -48,19 +61,19 @@ const Form = styled.form``;
 
 const PhotoWrapper = styled.div`
   display: flex;
-  width: 90%;
+  width: 10%;
   justify-content: center;
   align-items: center;
-  position: relative;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  position: absolute;
+  top: 30%;
+  left: 3%;
 `;
 
 const Photo = styled.img`
   width: 100%;
   border-radius: 20px;
   margin-bottom: 20px;
+  border: 1px solid #111;
 `;
 
 const Button = styled.button`
@@ -78,16 +91,20 @@ const Button = styled.button`
   }
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 25px;
+  border: 1px solid #111;
+`;
 
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 600px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   height: 100%;
-  border: ${({ theme }) => theme.baseBorderStyle};
-  padding-top: 125px;
-  padding-bottom: 20px;
 `;
 
 const BackImg = styled.div`
@@ -113,65 +130,60 @@ const UserImg = styled.img`
   width: 135px;
   height: 135px;
   border-radius: 50%;
-  padding: 5px;
-  background-color: white;
-  margin-left: 20px;
+  border: 1px solid #111;
   margin-bottom: 20px;
   z-index: 2;
 `;
 
 const UserInfo = styled.span`
-  margin-left: 20px;
   font-size: 2em;
   font-weight: bold;
+  text-align: center;
 `;
 
 const Label = styled.label`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 40px;
   height: 40px;
   cursor: pointer;
-  margin-left: 10px;
-  color: ${({ theme }) => theme.mainBlueColor};
-  &:hover {
-    border-radius: 50%;
-    background-color: #e8f5fd;
-  }
+  position: absolute;
+  top: -90px;
+  left: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a4a2f3;
+  border-radius: 50%;
+  border: 1px solid #111;
+  color: #fff;
 `;
 
 const SubmitInput = styled.input<{ isMessage: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
+  display: block;
+  border: 1px solid #111;
   width: 80px;
   height: 30px;
   border-radius: 15px;
-  background: none;
-  color: white;
+  margin-left: auto;
+  color: #fff;
   font-weight: 600;
   font-size: 1.2em;
-  cursor: ${({ isMessage }) => (isMessage ? 'pointer' : 'click')};
-  background-color: ${({ theme, isMessage }) =>
-    isMessage ? theme.mainBlueColor : theme.mainWhiteBlueColor};
+  cursor: pointer;
+  background-color: #a4a2f3;
 `;
 
 const EditWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
-`;
-const Edit = styled.span`
-  font-size: 1.6em;
-  font-weight: bold;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  position: relative;
 `;
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
 `;
 
@@ -243,61 +255,61 @@ export default function Profile({ userObj, refreshUser }: IProfileProps) {
   };
   return (
     <Container>
-      <Navigation userObj={userObj} />
-      <BackImg />
-      <FormWrapper>
-        <UserImg
-          src={userObj.photoURL !== null ? userObj.photoURL : GUEST_ICON}
-        />
-        <Wrapper>
-          <UserInfo>
-            {userObj.displayName ? userObj.displayName : GUEST_NAME}
-          </UserInfo>
-          <EditWrapper>
-            <Edit>Edit Profile</Edit>
-            <Form
-              onSubmit={onSubmit}
-              onKeyPress={(e) => onEnterPress(e, onSubmit)}
-            >
-              <InputWrapper>
-                <Input
-                  onChange={onChange}
-                  type="text"
-                  placeholder="Display Name"
-                  value={newDisplayName}
-                />
-
-                <Label htmlFor="profile_id">
-                  <FontAwesomeIcon size="2x" icon={faImage} />
-                  <PhotoInput
-                    ref={profileRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={onProfileImage}
-                    id="profile_id"
+      <ContainerBox>
+        <TopBar></TopBar>
+        <Navigation userObj={userObj} />
+        {/* <BackImg /> */}
+        <FormWrapper>
+          <UserImg
+            src={userObj.photoURL !== null ? userObj.photoURL : GUEST_ICON}
+          />
+          <Wrapper>
+            <UserInfo>
+              {userObj.displayName ? userObj.displayName : GUEST_NAME}
+            </UserInfo>
+            <EditWrapper>
+              <Form
+                onSubmit={onSubmit}
+                onKeyPress={(e) => onEnterPress(e, onSubmit)}
+              >
+                <InputWrapper>
+                  <Input
+                    onChange={onChange}
+                    type="text"
+                    placeholder="Display Name"
+                    value={newDisplayName}
                   />
-                </Label>
-              </InputWrapper>
-              <SubmitInput
-                isMessage={userName !== newDisplayName || profileImg !== ''}
-                type="submit"
-                value="Save"
-              />
-            </Form>
-          </EditWrapper>
-        </Wrapper>
 
-        {profileImg && (
-          <PhotoWrapper>
-            <Photo src={profileImg} />
-            <Button onClick={onClearPhoto}>
-              <FontAwesomeIcon color="white" icon={faX} />
-            </Button>
-          </PhotoWrapper>
-        )}
+                  <Label htmlFor="profile_id">
+                    <FontAwesomeIcon size="2x" icon={faImage} />
+                    <PhotoInput
+                      ref={profileRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={onProfileImage}
+                      id="profile_id"
+                    />
+                  </Label>
+                </InputWrapper>
+                <SubmitInput
+                  isMessage={userName !== newDisplayName || profileImg !== ''}
+                  type="submit"
+                  value="Save"
+                />
+              </Form>
+            </EditWrapper>
+          </Wrapper>
 
-        <Logout onClick={onLogoutClick}>Log Out</Logout>
-      </FormWrapper>
+          {profileImg && (
+            <PhotoWrapper>
+              <Photo src={profileImg} />
+              <Button onClick={onClearPhoto}>
+                <FontAwesomeIcon color="white" icon={faX} />
+              </Button>
+            </PhotoWrapper>
+          )}
+        </FormWrapper>
+      </ContainerBox>
     </Container>
   );
 }

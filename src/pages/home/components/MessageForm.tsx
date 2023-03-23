@@ -18,9 +18,9 @@ const Form = styled.form`
   flex-direction: column;
   width: 600px;
   height: 100%;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
-  border-bottom: 1px solid #fff;
+  border-left: 1px solid #111;
+  border-right: 1px solid #111;
+  border-bottom: 1px solid #111;
   padding: 17px;
 `;
 
@@ -44,6 +44,7 @@ const SubmitInput = styled.input<{ isMessage: boolean }>`
   font-size: 1.2em;
   background-color: #9897ea;
   border: 1px solid #111;
+  cursor: pointer;
 `;
 
 const PhotoInput = styled.input`
@@ -117,22 +118,6 @@ const TextInput = styled.input`
   }
 `;
 
-const Label = styled.label`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  color: #111;
-  box-sizing: border-box;
-  &:hover {
-    border-radius: 50%;
-    background-color: #9897ea;
-    border: 1px solid #fff;
-  }
-`;
-
 const TextWrapper = styled.div`
   display: flex;
   align-items: flex-start;
@@ -180,7 +165,8 @@ const Button = styled.button`
 
 const BottomNav = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
+  gap: 10px;
   padding-left: 50px;
   label {
     > img {
@@ -188,6 +174,22 @@ const BottomNav = styled.div`
       width: 20px;
       height: 20px;
     }
+  }
+`;
+
+const Label = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  color: #111;
+  box-sizing: border-box;
+  border: 1px solid #111;
+  border-radius: 50%;
+  &:hover {
+    background-color: #9897ea;
   }
 `;
 
@@ -279,8 +281,7 @@ export default function MessageForm({ userObj }: IUserObjProps) {
       )}
       <BottomNav>
         <Label htmlFor="photo_id">
-          {/* <FontAwesomeIcon size="2x" icon={faImage} /> */}
-          <img src={process.env.PUBLIC_URL + '/images/photo_icon.png'} />
+          <FontAwesomeIcon size="2x" icon={faImage} />
           <PhotoInput
             ref={photoRef}
             type="file"
