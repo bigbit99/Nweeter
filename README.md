@@ -8,9 +8,11 @@ https://bigbit99.github.io/Nweeter/
 
 
 ## 멤버 구성👩🏻‍💻
-|김한빛|
-|[<img src="https://user-images.githubusercontent.com/108947985/235067739-299417f3-d4fb-4c91-a9c4-c1c2e6405edf.png" width=150> <br /> @bigbit99|
-|프론트엔드|
+| **김한빛** | 
+|  :------: |
+| [<img src="https://user-images.githubusercontent.com/108947985/235067739-299417f3-d4fb-4c91-a9c4-c1c2e6405edf.png" width=150> <br/> @bigbit99](https://github.com/bigbit99) | 
+|  :------: |
+| **프론트엔드** | 
 
 
 ## Stacks 🏷
