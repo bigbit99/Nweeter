@@ -26,8 +26,8 @@ https://bigbit99.github.io/Nweeter/
 | **메인 페이지** | **로그인 페이지** |
 | :-----------: | :-----------: |
 | <img src="https://user-images.githubusercontent.com/108947985/235084059-9ebceae0-1974-4f8c-b141-e4b7b7cb6d9a.png"> | <img src="https://user-images.githubusercontent.com/108947985/235084150-38d5023f-8bc0-42fd-97d2-89b8d12a5572.png"> |
-| **프로필 페이지 | **게시글 페이지** |
-| <img src="https://user-images.githubusercontent.com/108947985/235084059-9ebceae0-1974-4f8c-b141-e4b7b7cb6d9a.png"> | <img src="https://user-images.githubusercontent.com/108947985/235084150-38d5023f-8bc0-42fd-97d2-89b8d12a5572.png"> |
+| **프로필 페이지** | **게시글 페이지** |
+| <img src="https://user-images.githubusercontent.com/108947985/235084713-bc7edaec-4ddd-421d-8513-2875ea3e0145.png"> | <img src="https://user-images.githubusercontent.com/108947985/235084774-f8029491-3846-487b-99f2-4d0524ec11ce.png"> |
 
 ## 주요 기능 💡
 
