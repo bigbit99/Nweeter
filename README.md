@@ -9,7 +9,7 @@ https://bigbit99.github.io/Nweeter/
 
 ## 멤버 구성👩🏻‍💻
 |김한빛|
-|[https://github.com/bigbit99/Nweeter/issues/1#issue-1687957502]|
+|[https://user-images.githubusercontent.com/108947985/235067739-299417f3-d4fb-4c91-a9c4-c1c2e6405edf.png]|
 |프론트엔|
 
 
