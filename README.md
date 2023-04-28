@@ -23,6 +23,10 @@ https://bigbit99.github.io/Nweeter/
 
 
 ## 화면 구성 📺
+| **메인 페이지** |
+| :-----------: |
+| [<img scr="https://user-images.githubusercontent.com/108947985/235084059-9ebceae0-1974-4f8c-b141-e4b7b7cb6d9a.png">] | 
+
 
 ## 주요 기능 💡
 
