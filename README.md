@@ -30,4 +30,15 @@ https://bigbit99.github.io/Nweeter/
 | <img src="https://user-images.githubusercontent.com/108947985/235084713-bc7edaec-4ddd-421d-8513-2875ea3e0145.png"> | <img src="https://user-images.githubusercontent.com/108947985/235084774-f8029491-3846-487b-99f2-4d0524ec11ce.png"> |
 
 ## 주요 기능 💡
+## 🔌 로그인 기능 
+• 구글 이메일을 통한 소셜 로그인 가능 
+• 이메일, 비밀번호 입력으로 회원가입 및 로그인 가능 
 
+## 🔌 수정 기능 
+• 로그인 시 프로필 텍스트 및 사진 수정 가능 
+• 작성 게시물 수정, 삭제 가능 
+
+## 🔌 업데이트 기능 
+• 사진 및 게시글 업로드 가능 
+
+• 사진 및 
